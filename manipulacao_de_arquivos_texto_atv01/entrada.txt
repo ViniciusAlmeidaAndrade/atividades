@@ -1,0 +1,5 @@
+Este é um problema simples.
+Podemos resolver este problema facilmente.
+Esta linha deve ser ignorada.
+Outro problema aparece aqui.
+Linha comum sem problemas.
