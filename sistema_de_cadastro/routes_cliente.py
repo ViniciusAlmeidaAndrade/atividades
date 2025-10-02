@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
 from db import get_db
 from models import Cliente, Pedido
-from schemas import ClienteCreate, ClienteOut, PedidoOut
+from schemas import ClienteCreate, ClienteOut, PedidoOut, ClienteUpdate
 
 cliente_router = APIRouter(prefix="/clientes", tags=["clientes"])
 
@@ -45,13 +45,13 @@ async def pedido_do_cliente(id: int, db: AsyncSession = Depends(get_db)):
     pedido_cliente = resultado.scalars().all()
 
     if not pedido_cliente:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Nenhum pedido foi encontrado para {Cliente.nome}.")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Nenhum pedido foi encontrado para o cliente de ID: {id}.")
 
     return pedido_cliente
 
 
 @cliente_router.patch("/{id}", status_code=status.HTTP_200_OK, response_model=ClienteOut)
-async def atualizar_cliente(id: int, payload: ClienteCreate, db: AsyncSession = Depends(get_db)):
+async def atualizar_cliente(id: int, payload: ClienteUpdate, db: AsyncSession = Depends(get_db)):
 
     cliente = await db.get(Cliente, id)
 
