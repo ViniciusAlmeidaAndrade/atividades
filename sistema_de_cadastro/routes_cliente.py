@@ -52,15 +52,17 @@ async def pedido_do_cliente(id: int, db: AsyncSession = Depends(get_db)):
 
 @cliente_router.patch("/{id}", status_code=status.HTTP_200_OK, response_model=ClienteOut)
 async def atualizar_cliente(id: int, payload: ClienteUpdate, db: AsyncSession = Depends(get_db)):
-
     cliente = await db.get(Cliente, id)
 
     if not cliente:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="cliente não foi encontrado.")
 
-    cliente.nome = payload.nome
-    cliente.email = payload.email
-    cliente.telefone = payload.telefone
+    if payload.nome is not None:
+        cliente.nome = payload.nome
+    if payload.email is not None:
+        cliente.email = payload.email
+    if payload.telefone is not None:
+        cliente.telefone = payload.telefone
 
     await db.commit()
     await db.refresh(cliente)

@@ -44,9 +44,12 @@ async def atualizar_pedido(id: int, payload: PedidoUpdate, db: AsyncSession = De
     if not pedido:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Nenhum pedido foi encontrado.")
 
-    pedido.cliente_id = payload.cliente_id
-    pedido.produto = payload.produto
-    pedido.valor = payload.valor
+    if payload.cliente_id is not None:
+        pedido.cliente_id = payload.cliente_id
+    if payload.produto is not None:
+        pedido.produto = payload.produto
+    if payload.valor is not None:
+        pedido.valor = payload.valor
 
     await db.commit()
     await db.refresh(pedido)
