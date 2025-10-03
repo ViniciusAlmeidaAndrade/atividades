@@ -1,5 +1,9 @@
+from datetime import datetime
+
 import requests
 import sys
+
+from models import Cliente, Pedido
 
 API_URL = "http://127.0.0.1:8000"
 
@@ -64,8 +68,10 @@ def listar_pedidos_de_cliente():
         if pedidos:
             print(f"\nPedidos encontrados para o cliente de ID {cliente_id}:")
             for pedido in pedidos:
+                data_obj = datetime.fromisoformat(pedido['data'])
+                data_formatada = data_obj.strftime("%d/%m/%Y %H:%M")
                 print(
-                    f"ID: {pedido['id']} | Produto: {pedido['produto']} | Valor: R$ {pedido['valor']} | Data: {pedido['data']}")
+                    f"ID: {pedido['id']} | Produto: {pedido['produto']} | Valor: R$ {pedido['valor']} | Data: {data_formatada}")
         else:
             print(f"\nNenhum pedido foi encontrado para o cliente de ID {cliente_id}.")
     elif resp.status_code == 404:
@@ -159,8 +165,10 @@ def listar_pedidos():
     if pedidos:
         print("\nPedidos encontrados:")
         for pedido in pedidos:
+            data_obj = datetime.fromisoformat(pedido['data'])
+            data_formatada = data_obj.strftime("%d/%m/%Y %H:%M")
             print(
-                f"ID: {pedido['id']} | Cliente ID: {pedido['cliente_id']} | Produto: {pedido['produto']} | Valor: R$ {pedido['valor']} | Data: {pedido['data']}")
+                f"ID: {pedido['id']} | Cliente ID: {pedido['cliente_id']} | Produto: {data_formatada} | Valor: R$ {pedido['valor']} | Data: {pedido['data']}")
     else:
         print("\nNenhum pedido foi encontrado.")
 
