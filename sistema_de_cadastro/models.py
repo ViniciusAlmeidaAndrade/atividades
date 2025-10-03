@@ -4,6 +4,7 @@ from db import Base
 
 class Cliente(Base):
     __tablename__ = 'clientes'
+
     id = Column(Integer, index=True, primary_key=True, autoincrement=True)
     nome = Column(String(100), nullable=False)
     email = Column(String(100), nullable=False)
