@@ -2,7 +2,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlalchemy.orm import declarative_base
 
-DB_URL = 'sqlite+aiosqlite:///cliente_pedido.sqlite3'
+DB_URL = 'sqlite+aiosqlite:///cliente_pedido.db'
 
 engine = create_async_engine(DB_URL, future=True)
 AsyncSessionLocal = async_sessionmaker(bind=engine, expire_on_commit=False)
