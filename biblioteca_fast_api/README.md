@@ -32,19 +32,19 @@ A intenção do projeto é praticar a criação de endpoints REST usando **FastA
 
 ## 🧰 Tecnologias
 
+```
+| Tecnologia | Função                               |
 
-| Tecnologia | Função |
+|------------|--------------------------------------|
 
-|------------|--------|
+| Python     | Linguagem principal                  |
 
-| Python     | Linguagem principal |
-
-| FastAPI    | Framework para criar a API REST |
+| FastAPI    | Framework para criar a API REST      |
 
 | Uvicorn    | Servidor ASGI para rodar a aplicação |
 
-| Pydantic   | Para validação e modelagem de dados |
-
+| Pydantic   | Para validação e modelagem de dados  |
+```
 
 > FastAPI é conhecido por ser altamente performático e por gerar documentação automática da API. :contentReference[oaicite:4]{index=4}
 
